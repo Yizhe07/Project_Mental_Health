@@ -188,12 +188,7 @@ void Control::menu()
 
 void Control::display()
 {
-	std::cout << this->tableHeader << endl;
-	for (auto& val : vec_per)
-	{
-		val.display();
-	}
-	std::cout << "There are(" << vec_per.size() << ")data" << endl;
+	//
 }
 
 void Control::insert()
@@ -220,14 +215,7 @@ void Control::insert()
 
 void Control::delet()
 {
-	int n = -1;
-	cout << "Please enter the ID of the person you want to delete>";
-	cin >> n;
-	auto delIt = std::find(vec_per.begin(), vec_per.end(), Person(n));
-	if (delIt != vec_per.end())
-	{
-		vec_per.erase(delIt);
-	}
+	//
 }
 
 void Control::modify()
@@ -251,8 +239,7 @@ void Control::search()
 
 void Control::sort()
 {
-	std::sort(vec_per.begin(), vec_per.end());
-	std::cout << "Sorting succeed" << std::endl;
+	//
 }
 
 void Control::read(const std::string& fileName)
