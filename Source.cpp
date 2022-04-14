@@ -72,22 +72,6 @@ void Person::formatWrite(const std::string& str)
 }
 
 
-bool Person::operator==(const Person& right) const
-{
-	return this->ID == right.ID;
-}
-
-bool Person::operator>(const Person& right) const
-{
-	return this->ID > right.ID;
-}
-
-bool Person::operator<(const Person& right) const
-{
-	return this->ID < right.ID;
-}
-
-
 class Control
 {
 	enum Operator
