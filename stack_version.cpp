@@ -4,7 +4,7 @@
 #include <cstring>
 using namespace std;
 
-/*学生类*/
+
 class Person
 {
 public:
@@ -73,7 +73,7 @@ private:
 	float fAge[3];
 };
 
-/*栈类*/
+
 class CStack
 {
 public:
@@ -229,14 +229,12 @@ void Control::sort()
 
 }
 
-/*主函数*/
 int main(void)
 {
 	Control x;
 	x.start();
 }
 
-/*栈的析构函数*/
 CStack::CStack(int nSize)
 {
 	m_nSize = nSize;
@@ -277,7 +275,3 @@ Person CStack::pop(void)
 	else
 		return *sp;
 }
-
-
-
-// Per.SetData("1","Male", "USA", "MS", "YES", "NO", "A", 43);
