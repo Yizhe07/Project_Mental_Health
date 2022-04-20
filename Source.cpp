@@ -172,7 +172,7 @@ void Control::menu()
 	cout << "***** 4, Modify data      *****" << endl;
 	cout << "***** 5, Search data      *****" << endl;
 	cout << "***** 6, Sort data        *****" << endl;
-	cout << "***** 7, Exit             *****" << endl;
+	cout << "***** 7, Exit and save    *****" << endl;
 	cout << "***** 0, Clear screen     *****" << endl;
 	cout << endl;
 }
