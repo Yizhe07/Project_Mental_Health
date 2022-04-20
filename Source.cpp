@@ -18,11 +18,9 @@ public:
 		const std::string& Country, const std::string& State, 
 		const std::string& History, const std::string& Work, 
 		const std::string& Score);
-	//
 	void display();
-	//
-	std::string formatInfo();
-	void formatWrite(const std::string& str);
+	std::string datainfo();
+	void datawrite(const std::string& str);
 public:
 	bool operator==(const Person& right) const;
 	bool operator>(const Person& right) const;
@@ -58,14 +56,14 @@ void Person::display()
 
 }
 
-std::string Person::formatInfo()
+std::string Person::datainfo()
 {
 	stringstream ss;
 	ss << this->ID << "\t" << this->Age << "\t" << this->Gender << "\t" << this->Country << "\t" << this->State << "\t" << this->History << "\t" << this->Work << "\t" << this->Score << endl;
 	return ss.str();
 }
 
-void Person::formatWrite(const std::string& str)
+void Person::datawrite(const std::string& str)
 {
 	stringstream ss(str);
 	ss << this->ID << "\t" << this->Age << "\t" << this->Gender << "\t" << this->Country << "\t" << this->State << "\t" << this->History << "\t" << this->Work << "\t" << this->Score;
@@ -104,25 +102,18 @@ public:
 	Control();
 	void start();
 	void menu();
-	//
 	void display();
-	//
 	void insert();
-	//
 	void delet();
-	//
 	void modify();
 	void search();
-	//
 	void sort();
 private:
-	//
 	void read(const std::string& fileName);
-	//
 	void write(const std::string& fileName);
 public:
-	std::string tableHeader;	//
-	std::vector<Person> vec_per;
+	std::string tableHeader;
+	std::vector<Person> pervec;
 };
 
 Control::Control()
@@ -189,11 +180,11 @@ void Control::menu()
 void Control::display()
 {
 	std::cout << this->tableHeader << endl;
-	for (auto& val : vec_per)
+	for (auto& val : pervec)
 	{
 		val.display();
 	}
-	std::cout << "There are(" << vec_per.size() << ")data" << endl;
+	std::cout << "There are(" << pervec.size() << ")data" << endl;
 }
 
 void Control::insert()
@@ -215,7 +206,7 @@ void Control::insert()
 	cin >> per.Work;
 	cout << "Please enter Score(A, B, C or D)" << endl;
 	cin >> per.Score;
-	vec_per.push_back(per);
+	pervec.push_back(per);
 }
 
 void Control::delet()
@@ -223,10 +214,10 @@ void Control::delet()
 	int n = -1;
 	cout << "Please enter the ID of the person you want to delete>";
 	cin >> n;
-	auto delIt = std::find(vec_per.begin(), vec_per.end(), Person(n));
-	if (delIt != vec_per.end())
+	auto del = std::find(pervec.begin(), pervec.end(), Person(n));
+	if (del != pervec.end())
 	{
-		vec_per.erase(delIt);
+		pervec.erase(del);
 	}
 }
 
@@ -235,10 +226,10 @@ void Control::modify()
 	cout << "Please enter the ID of the person you want to modify" << endl;
 	Person per;
 	cin >> per.ID;
-	auto findIt = std::find(vec_per.begin(), vec_per.end(), per);
-	if (findIt != vec_per.end())
+	auto findit = std::find(pervec.begin(), pervec.end(), per);
+	if (findit != pervec.end())
 	{
-		vec_per.erase(findIt);
+		pervec.erase(findit);
 		cout << "Please enter the new ID" << endl;
 		cin >> per.ID;
 		cout << "Please enter  new Age" << endl;
@@ -255,7 +246,7 @@ void Control::modify()
 		cin >> per.Work;
 		cout << "Please enter Score(A, B, C or D)" << endl;
 		cin >> per.Score;
-		vec_per.push_back(per);
+		pervec.push_back(per);
 	}
 }
 
@@ -264,8 +255,8 @@ void Control::search()
 	cout << "Please enter the ID of the person you want to search for" << endl;
 	Person per;
 	cin >> per.ID;
-	auto findIt = std::find(vec_per.begin(), vec_per.end(), per);
-	if (findIt != vec_per.end())
+	auto findIt = std::find(pervec.begin(), pervec.end(), per);
+	if (findIt != pervec.end())
 	{
 		cout << "Found ";
 		findIt->display();
@@ -280,13 +271,13 @@ void Control::sort()
 	cin >> sign;
 	if (sign == 1)
 	{
-		std::sort(vec_per.begin(), vec_per.end());
+		std::sort(pervec.begin(), pervec.end());
 		std::cout << "Sorting succeed" << std::endl;
 	}
 
 	else if (sign == 2)
 	{
-		std::sort(vec_per.begin(), vec_per.end(), greater<>());
+		std::sort(pervec.begin(), pervec.end(), greater<>());
 		std::cout << "Sorting succeed" << std::endl;
 	}
 
@@ -306,10 +297,8 @@ void Control::read(const std::string& fileName)
 	}
 	Person per;
 	char buf[1024] = { 0 };
-	//
 	stream.getline(buf, 1024);
 	tableHeader = buf;
-	//
 	while (!stream.eof())
 	{
 		memset(buf, 0, sizeof(buf));
@@ -317,7 +306,7 @@ void Control::read(const std::string& fileName)
 
 		stringstream ss(buf);
 		ss >> per.ID >> per.Age >> per.Gender >> per.Country >> per.State >> per.History >> per.Work >> per.Score;
-		vec_per.push_back(per);
+		pervec.push_back(per);
 	}
 	stream.close();
 }
@@ -332,9 +321,9 @@ void Control::write(const std::string& fileName)
 	}
 	tableHeader += '\n';
 	write.write(tableHeader.c_str(), tableHeader.size());
-	for (auto& val : vec_per)
+	for (auto& val : pervec)
 	{
-		string info = val.formatInfo();
+		string info = val.datainfo();
 		write.write(info.c_str(), info.size());
 	}
 	write.close();
