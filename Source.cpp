@@ -72,6 +72,22 @@ void Person::formatWrite(const std::string& str)
 }
 
 
+bool Person::operator==(const Person& right) const
+{
+	return this->ID == right.ID;
+}
+
+bool Person::operator>(const Person& right) const
+{
+	return this->ID > right.ID;
+}
+
+bool Person::operator<(const Person& right) const
+{
+	return this->ID < right.ID;
+}
+
+
 class Control
 {
 	enum Operator
@@ -172,7 +188,12 @@ void Control::menu()
 
 void Control::display()
 {
-	//
+	std::cout << this->tableHeader << endl;
+	for (auto& val : vec_per)
+	{
+		val.display();
+	}
+	std::cout << "There are(" << vec_per.size() << ")data" << endl;
 }
 
 void Control::insert()
@@ -192,19 +213,50 @@ void Control::insert()
 	cin >> per.History;
 	cout << "If you have too much work, please enter Yes, else please enter No" << endl;
 	cin >> per.Work;
-	cout << "Please enter Score(From 1 to 100)" << endl;
+	cout << "Please enter Score(A, B, C or D)" << endl;
 	cin >> per.Score;
 	vec_per.push_back(per);
 }
 
 void Control::delet()
 {
-	//
+	int n = -1;
+	cout << "Please enter the ID of the person you want to delete>";
+	cin >> n;
+	auto delIt = std::find(vec_per.begin(), vec_per.end(), Person(n));
+	if (delIt != vec_per.end())
+	{
+		vec_per.erase(delIt);
+	}
 }
 
 void Control::modify()
 {
-	//not done
+	cout << "Please enter the ID of the person you want to modify" << endl;
+	Person per;
+	cin >> per.ID;
+	auto findIt = std::find(vec_per.begin(), vec_per.end(), per);
+	if (findIt != vec_per.end())
+	{
+		vec_per.erase(findIt);
+		cout << "Please enter the new ID" << endl;
+		cin >> per.ID;
+		cout << "Please enter  new Age" << endl;
+		cin >> per.Age;
+		cout << "Please enter  newGender" << endl;
+		cin >> per.Gender;
+		cout << "Please enter  new Country(Please enter country abbreviation in order to keep the format right)" << endl;
+		cin >> per.Country;
+		cout << "Please enter new State(Please enter state abbreviation in order to keep the format right)" << endl;
+		cin >> per.State;
+		cout << "If you have mental problems history, please enter Yes, else please enter No" << endl;
+		cin >> per.History;
+		cout << "If you have too much work, please enter Yes, else please enter No" << endl;
+		cin >> per.Work;
+		cout << "Please enter Score(A, B, C or D)" << endl;
+		cin >> per.Score;
+		vec_per.push_back(per);
+	}
 }
 
 void Control::search()
@@ -223,7 +275,25 @@ void Control::search()
 
 void Control::sort()
 {
-	//
+	int sign;
+	cout << "If want to sort ID from low to high, enter 1, if you want to sort ID from high to low, enter 2" << endl;
+	cin >> sign;
+	if (sign == 1)
+	{
+		std::sort(vec_per.begin(), vec_per.end());
+		std::cout << "Sorting succeed" << std::endl;
+	}
+
+	else if (sign == 2)
+	{
+		std::sort(vec_per.begin(), vec_per.end(), greater<>());
+		std::cout << "Sorting succeed" << std::endl;
+	}
+
+	else if (sign != 2 && sign != 1)
+	{
+		cout << "Invalid input" << endl;
+	}
 }
 
 void Control::read(const std::string& fileName)
