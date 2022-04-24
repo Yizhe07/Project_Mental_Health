@@ -10,23 +10,23 @@ using namespace std;
 
 class Person
 {
-	using uint32 = unsigned;
+	using uint32 = unsigned; //Use uint32 to restore more data because there is no negative numbers.
 public:
-	Person();
-	Person(uint32 ID);
-	Person(uint32 ID, int Age, const std::string& Gender, 
+	Person(); //The function itself
+	Person(uint32 ID); //Use ID to identify different people.
+	Person(uint32 ID, int Age, const std::string& Gender, //use std to store the the data. Data structure used is std string.
 		const std::string& Country, const std::string& State, 
 		const std::string& History, const std::string& Work, 
 		const std::string& Score);
-	void display();
-	std::string datainfo();
-	void datawrite(const std::string& str);
+	void display(); //The display operation.
+	std::string datainfo(); //To get our data information as strings.
+	void datawrite(const std::string& str); //To write our data information down.
 public:
-	bool operator==(const Person& right) const;
+	bool operator==(const Person& right) const; // To eliminate inappropriate data and be more efficient.
 	bool operator>(const Person& right) const;
 	bool operator<(const Person& right) const;
 public:
-	uint32 ID;
+	uint32 ID; //All of the different types in our data
 	int Age;
 	std::string Gender;
 	std::string Country;
@@ -36,7 +36,7 @@ public:
 	std::string Score;
 };
 
-Person::Person() :ID(0), Age(0)
+Person::Person() :ID(0), Age(0) // In order to initialize our data. All of the numbers should be 0.
 {
 }
 
@@ -45,17 +45,20 @@ Person::Person(uint32 ID) : Person()
 	this->ID = ID;
 }
 
+// The data structure should be a sequnces of strings.
 Person::Person(uint32 ID, int Age, const std::string& Gender, const std::string& Country, const std::string& State, const std::string& History, const std::string& Work, const std::string& Score)
 	:ID(ID), Age(Age), Gender(Gender), Country(Country), State(State), History(History), Work(Work), Score(Score)
 {
 }
 
+//Display all of the data.
 void Person::display()
 {
 	cout << this->ID << "\t" << this->Age << "\t" << this->Gender << "\t" << this->Country << "\t" << this->State << "\t" << this->History << "\t" << this->Work << "\t" << this->Score << endl;
 
 }
 
+// To get our data information as a sequence of strings.
 std::string Person::datainfo()
 {
 	stringstream ss;
@@ -63,13 +66,14 @@ std::string Person::datainfo()
 	return ss.str();
 }
 
+// Write the data down.
 void Person::datawrite(const std::string& str)
 {
 	stringstream ss(str);
 	ss << this->ID << "\t" << this->Age << "\t" << this->Gender << "\t" << this->Country << "\t" << this->State << "\t" << this->History << "\t" << this->Work << "\t" << this->Score;
 }
 
-
+// To eliminate inappropriate data and be more efficient.
 bool Person::operator==(const Person& right) const
 {
 	return this->ID == right.ID;
@@ -85,38 +89,40 @@ bool Person::operator<(const Person& right) const
 	return this->ID < right.ID;
 }
 
-
+// Define another class for the menu.
 class Control
 {
-	enum Operator
+	enum Operator //Create the menu. One number for one operation.
 	{
 		Display = 1,
 		Insert,
 		Delete,
-		Modify,
-		Search,
 		Sort,
+		Search,
+		Size,
+		Modify,
 		Exit,
 	};
 public:
-	Control();
+	Control(); //Use itself in order to read the data in first.
 	void start();
 	void menu();
 	void display();
 	void insert();
 	void delet();
-	void modify();
-	void search();
 	void sort();
+	void search();
+	void modify();
+	void size();
 private:
 	void read(const std::string& fileName);
 	void write(const std::string& fileName);
 public:
-	std::string tableHeader;
-	std::vector<Person> pervec;
+	std::string tableHeader; //The table header
+	std::vector<Person> pervec; // Use vector to store our data and process different operations.
 };
 
-Control::Control()
+Control::Control() //Read the data in first.
 {
 	read("./data.txt");
 }
@@ -126,7 +132,7 @@ void Control::start()
 	menu();
 	while (true)
 	{
-		cout << "Please choose>";
+		cout << "Please choose the operation you want<From 0 to 8>";
 		int op = -1;
 		cin >> op;
 		switch (op)
@@ -144,17 +150,20 @@ void Control::start()
 		case Control::Delete:
 			delet();
 			break;
-		case Control::Modify:
-			modify();
+		case Control::Sort:
+			sort();
+			break;
+		case Control::Size:
+			size();
 			break;
 		case Control::Search:
 			search();
 			break;
-		case Control::Sort:
-			sort();
+		case Control::Modify:
+			modify();
 			break;
 		case Control::Exit:
-			write("./save.txt");
+			write("./save.txt"); //Save our data in another txt file.
 			exit(0);
 			break;
 		default:
@@ -163,30 +172,35 @@ void Control::start()
 	}
 }
 
+//Menu
 void Control::menu()
 {
-	cout << "===   Mental health System   ==="<< endl;
+	cout << "===   Mental Health System   ==="<< endl;
 	cout << "***** 1, Display          *****" << endl;
 	cout << "***** 2, Insert new data  *****" << endl;
 	cout << "***** 3, Delete data      *****" << endl;
-	cout << "***** 4, Modify data      *****" << endl;
+	cout << "***** 4, Sort data        *****" << endl;
 	cout << "***** 5, Search data      *****" << endl;
-	cout << "***** 6, Sort data        *****" << endl;
-	cout << "***** 7, Exit and save    *****" << endl;
+	cout << "***** 6, Size of the data *****" << endl;
+	cout << "***** 7, Modify data      *****" << endl;
+	cout << "***** 8, Exit and save    *****" << endl;
 	cout << "***** 0, Clear screen     *****" << endl;
 	cout << endl;
 }
 
+//Display
 void Control::display()
 {
 	std::cout << this->tableHeader << endl;
-	for (auto& val : pervec)
+	//Dispaly th etable header first.
+	for (auto& val : pervec) //Use auto to display the correct type of data.
 	{
 		val.display();
 	}
-	std::cout << "There are(" << pervec.size() << ")data" << endl;
+	std::cout << "There are(" << pervec.size() << ")data" << endl; //Size of the data
 }
 
+//Insert
 void Control::insert()
 {
 	Person per;
@@ -196,9 +210,9 @@ void Control::insert()
 	cin >> per.Age;
 	cout << "Please enter Gender" << endl;
 	cin >> per.Gender;
-	cout << "Please enter Country(Please enter country abbreviation in order to keep the format right)" << endl;
+	cout << "Please enter Country(Please enter country abbreviation)" << endl;
 	cin >> per.Country;
-	cout << "Please enter State(Please enter state abbreviation in order to keep the format right)" << endl;
+	cout << "Please enter State(Please enter state abbreviation)" << endl;
 	cin >> per.State;
 	cout << "If you have mental problems history, please enter Yes, else please enter No" << endl;
 	cin >> per.History;
@@ -206,7 +220,7 @@ void Control::insert()
 	cin >> per.Work;
 	cout << "Please enter Score(A, B, C or D)" << endl;
 	cin >> per.Score;
-	pervec.push_back(per);
+	pervec.push_back(per); //use push_back to add a new data in the end.
 }
 
 void Control::delet()
@@ -214,13 +228,19 @@ void Control::delet()
 	int n = -1;
 	cout << "Please enter the ID of the person you want to delete>";
 	cin >> n;
-	auto del = std::find(pervec.begin(), pervec.end(), Person(n));
+	auto del = std::find(pervec.begin(), pervec.end(), Person(n)); //Also can use auto here to tarverse the list.
+	//If n is in the list, then delete it, else print error
 	if (del != pervec.end())
 	{
 		pervec.erase(del);
 	}
+	else
+	{
+		cout << "No ID found, please choose another operation." << endl;
+	}
 }
 
+//In order to modify the list, we can first delete the chosed data and then write in a new one.
 void Control::modify()
 {
 	cout << "Please enter the ID of the person you want to modify" << endl;
@@ -234,11 +254,11 @@ void Control::modify()
 		cin >> per.ID;
 		cout << "Please enter  new Age" << endl;
 		cin >> per.Age;
-		cout << "Please enter  newGender" << endl;
+		cout << "Please enter  new Gender" << endl;
 		cin >> per.Gender;
-		cout << "Please enter  new Country(Please enter country abbreviation in order to keep the format right)" << endl;
+		cout << "Please enter  new Country(Please enter country abbreviation)" << endl;
 		cin >> per.Country;
-		cout << "Please enter new State(Please enter state abbreviation in order to keep the format right)" << endl;
+		cout << "Please enter new State(Please enter state abbreviation)" << endl;
 		cin >> per.State;
 		cout << "If you have mental problems history, please enter Yes, else please enter No" << endl;
 		cin >> per.History;
@@ -247,6 +267,11 @@ void Control::modify()
 		cout << "Please enter Score(A, B, C or D)" << endl;
 		cin >> per.Score;
 		pervec.push_back(per);
+	}
+	//If not found,print error.
+	else
+	{
+		cout << "No ID found, please choose another operation." << endl;
 	}
 }
 
@@ -261,6 +286,10 @@ void Control::search()
 		cout << "Found ";
 		findIt->display();
 	}
+	else
+	{
+		cout << "No ID found, please choose another operation." << endl;
+	}
 
 }
 
@@ -269,12 +298,13 @@ void Control::sort()
 	int sign;
 	cout << "If want to sort ID from low to high, enter 1, if you want to sort ID from high to low, enter 2" << endl;
 	cin >> sign;
+	//Use the sort function in algorithm. It will sort the ID of different people.
 	if (sign == 1)
 	{
 		std::sort(pervec.begin(), pervec.end());
 		std::cout << "Sorting succeed" << std::endl;
 	}
-
+	//The default of sort function is from low to high, we can add greater in th end to sort from high to low.
 	else if (sign == 2)
 	{
 		std::sort(pervec.begin(), pervec.end(), greater<>());
@@ -287,8 +317,18 @@ void Control::sort()
 	}
 }
 
+//Size of the data.
+void Control::size()
+{
+	Person per;
+	std::cout << "The total number of the data is " << pervec.size() << endl;
+}
+
+//Read the txt file
 void Control::read(const std::string& fileName)
 {
+	
+	//Check if the file can be opened.
 	fstream stream(fileName.c_str(), ios::in);
 	if (!stream.is_open())
 	{
@@ -296,14 +336,18 @@ void Control::read(const std::string& fileName)
 		return;
 	}
 	Person per;
+	//Creat an empty buffer.
 	char buf[1024] = { 0 };
 	stream.getline(buf, 1024);
 	tableHeader = buf;
+	//First need to read the table header.
+	//And then the data
 	while (!stream.eof())
 	{
 		memset(buf, 0, sizeof(buf));
 		stream.getline(buf, 1024);
-
+		//Read the data
+		//And then display it.
 		stringstream ss(buf);
 		ss >> per.ID >> per.Age >> per.Gender >> per.Country >> per.State >> per.History >> per.Work >> per.Score;
 		pervec.push_back(per);
@@ -311,18 +355,23 @@ void Control::read(const std::string& fileName)
 	stream.close();
 }
 
+//Save the new dataset as another txt file.
 void Control::write(const std::string& fileName)
 {
 	fstream write(fileName.c_str(), ios::trunc | ios::out);
+	//check if the file can be opened.
 	if (!write.is_open())
 	{
 		cerr << fileName << " file open failed [save]";
 		return;
 	}
+	//write the table header
 	tableHeader += '\n';
+	//Use the strings already read for the table header.
 	write.write(tableHeader.c_str(), tableHeader.size());
 	for (auto& val : pervec)
 	{
+		//Write the new data.
 		string info = val.datainfo();
 		write.write(info.c_str(), info.size());
 	}
