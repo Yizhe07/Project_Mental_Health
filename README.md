@@ -23,8 +23,14 @@ The main code is in the link below, please click to see:
 https://github.com/Yizhe07/Project_Mental_Health/blob/master/Source.cpp
 
 
-The stark version code is in the GitHub. Please copy the link to see it.
+The stark version code is in the GitHub. Please copy the link to see it:
 
 https://github.com/Yizhe07/Project_Mental_Health/blob/master/stack_version.cpp
 
+The documentation is in the link below:
 
+https://github.com/Yizhe07/Project_Mental_Health/blob/master/Documentation(Including%20data%20structure%20and%20guideline).pdf
+
+The division of duties is in the link below:
+
+https://github.com/Yizhe07/Project_Mental_Health/blob/master/Division_of_duties.pdf
