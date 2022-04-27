@@ -33,6 +33,7 @@ https://github.com/Yizhe07/Project_Mental_Health/blob/master/stack_version.cpp
 The documentation(Including%20data%20structure%20and%20guideline) is in the link below:
 
 https://github.com/Yizhe07/Project_Mental_Health/blob/master/Documentation(Including%20data%20structure%20and%20guideline)%20(3).pdf
+
 The division of duties is in the link below:
 
 https://github.com/Yizhe07/Project_Mental_Health/blob/master/Division_of_duties(3).pdf
