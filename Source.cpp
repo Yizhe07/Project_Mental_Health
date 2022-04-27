@@ -35,6 +35,7 @@ Jalen Smith:
 3. Empty function (Individual work)
 4. PowerPoint for presentation
 5. Documentation
+6. Menu
 
 
 Jamal Beacham
@@ -43,6 +44,7 @@ Jamal Beacham
 2. Insert Function
 3. Size Function (Individual work)
 4. Documentation
+5. Menu
 
 
 
