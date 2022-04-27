@@ -6,7 +6,7 @@ By Jamal Beacham, Jalen Smith and Yizhe Wang
 
 Hi,
 
-in our project, users can type in all their information, such as name, state, and country and also
+In our project, users can type in all their information, such as name, state, and country and also
 add in if they have a history of mental problems and if they suffer from job stress. Once the users
 input all their information, they are allowed to grade their mental health on an A-D scale, in
 relation to how their job stress is affecting them. A is the highest grade and D is the lowest grade
