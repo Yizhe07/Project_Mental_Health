@@ -6,6 +6,51 @@
 #include<algorithm>
 #include<cstring>
 
+
+
+/*
+
+ Division of duties
+
+Yizhe Wang:
+
+1. (The stack version display code)
+2. Create the data structure for person (Class person and sequences of strings)
+3. Read data from the txt file
+4. Save the dataset in a new text file
+5. Menu
+6. Delete function
+7. Modify function (Individual work)
+8. Search function
+9. Sort function
+10. Read and Write function (Individual work)
+11. Documentation and user guideline
+
+
+
+Jalen Smith:
+
+1. Find and the dataset
+2. Display function
+3. Empty function (Individual work)
+4. PowerPoint for presentation
+5. Documentation
+
+
+Jamal Beacham
+
+1. Keep the dataset in right text format
+2. Insert Function
+3. Size Function (Individual work)
+4. Documentation
+
+
+
+*/
+
+
+
+
 using namespace std;
 
 class Person
@@ -15,8 +60,8 @@ public:
 	Person(); //The function itself
 	Person(uint32 ID); //Use ID to identify different people.
 	Person(uint32 ID, int Age, const std::string& Gender, //use std to store the the data. Data structure used is std string.
-		const std::string& Country, const std::string& State, 
-		const std::string& History, const std::string& Work, 
+		const std::string& Country, const std::string& State,
+		const std::string& History, const std::string& Work,
 		const std::string& Score);
 	void display(); //The display operation.
 	std::string datainfo(); //To get our data information as strings.
@@ -100,6 +145,7 @@ class Control
 		Sort,
 		Search,
 		Size,
+		Empty,
 		Modify,
 		Exit,
 	};
@@ -114,6 +160,7 @@ public:
 	void search();
 	void modify();
 	void size();
+	void empty();
 private:
 	void read(const std::string& fileName);
 	void write(const std::string& fileName);
@@ -153,6 +200,9 @@ void Control::start()
 		case Control::Sort:
 			sort();
 			break;
+		case Control::Empty:
+			empty();
+			break;
 		case Control::Size:
 			size();
 			break;
@@ -175,15 +225,16 @@ void Control::start()
 //Menu
 void Control::menu()
 {
-	cout << "===   Mental Health System   ==="<< endl;
+	cout << "===   Mental Health System   ===" << endl;
 	cout << "***** 1, Display          *****" << endl;
 	cout << "***** 2, Insert new data  *****" << endl;
 	cout << "***** 3, Delete data      *****" << endl;
 	cout << "***** 4, Sort data        *****" << endl;
 	cout << "***** 5, Search data      *****" << endl;
 	cout << "***** 6, Size of the data *****" << endl;
-	cout << "***** 7, Modify data      *****" << endl;
-	cout << "***** 8, Exit and save    *****" << endl;
+	cout << "***** 7, Check empty      *****" << endl;
+	cout << "***** 8, Modify data      *****" << endl;
+	cout << "***** 9, Exit and save    *****" << endl;
 	cout << "***** 0, Clear screen     *****" << endl;
 	cout << endl;
 }
@@ -192,7 +243,7 @@ void Control::menu()
 void Control::display()
 {
 	std::cout << this->tableHeader << endl;
-	//Dispaly th etable header first.
+	//Dispaly the table header first.
 	for (auto& val : pervec) //Use auto to display the correct type of data.
 	{
 		val.display();
@@ -213,7 +264,7 @@ void Control::insert()
 	cout << "Please enter Country(Please enter country abbreviation)" << endl;
 	cin >> per.Country;
 	cout << "Please enter State(Please enter state abbreviation)" << endl;
-	cin >> per.State;
+	cin >> per.State;  
 	cout << "If you have mental problems history, please enter Yes, else please enter No" << endl;
 	cin >> per.History;
 	cout << "If you have too much work, please enter Yes, else please enter No" << endl;
@@ -271,7 +322,7 @@ void Control::modify()
 	//If not found,print error.
 	else
 	{
-		cout << "No ID found, please choose another operation." << endl;
+		std::cout << "No ID found, please choose another operation." << endl;
 	}
 }
 
@@ -324,10 +375,29 @@ void Control::size()
 	std::cout << "The total number of the data is " << pervec.size() << endl;
 }
 
+//check if the data file is empty
+void Control::empty()
+{
+	fstream file;
+	int ch;
+	file.open("data.txt", ios::in);
+	ch = file.get(); 
+	if (file.eof())
+	{
+		cout << "Empty data file" << endl;
+	}
+	else
+	{
+		cout << "The data file is not empty" << endl;
+	}
+	file.close();
+	return;
+}
+
 //Read the txt file
 void Control::read(const std::string& fileName)
 {
-	
+
 	//Check if the file can be opened.
 	fstream stream(fileName.c_str(), ios::in);
 	if (!stream.is_open())
