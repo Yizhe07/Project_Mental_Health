@@ -36,7 +36,7 @@ https://github.com/Yizhe07/Project_Mental_Health/blob/master/Documentation(Inclu
 
 The division of duties is in the link below:
 
-https://github.com/Yizhe07/Project_Mental_Health/blob/master/Division_of_duties(1).pdf
+https://github.com/Yizhe07/Project_Mental_Health/blob/master/Division_of_duties(3).pdf
 
 The presentation ppt:
 
