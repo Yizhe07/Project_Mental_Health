@@ -3,6 +3,7 @@ Project Mental Health
 By Jamal Beacham, Jalen Smith and Yizhe Wang
 
 //Introduction
+
 In our project, users can type in all their information, such as name, state, and country and also
 add in if they have a history of mental problems and if they suffer from job stress. Once the users
 input all their information, they are allowed to grade their mental health on an A-D scale, in
@@ -13,6 +14,7 @@ Our project can record mental health conditions of each person, and should be he
 
 
 //Data structure
+
 The data structure used in our project is std strings. In the beginning, our group thought of whether we could use stacks to do the project. It took me some time to do the display code called stack_version.cpp, but found that this solution is not appropriate, because the code needs to read data from the text file and show them. Therefore, I changed my mind and decided to use std strings as our data structure. One of the biggest advantages of using std strings is that we can import our dataset as a text file and save it as another text file once the modification is completed. Also, we can store much more data as large as the size of uint32.
 
 
